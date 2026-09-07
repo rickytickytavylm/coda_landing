@@ -13,7 +13,7 @@
   function reveal() {
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
     const nodes = document.querySelectorAll(
-      ".voices li, .pillars li, .modules li, .author-facts li, .quote, .ticket"
+      ".voices li, .journey-card, .modules li, .author-facts li, .quote, .ticket"
     );
     const io = new IntersectionObserver(
       (entries) => {
@@ -109,13 +109,18 @@
   function dock() {
     const bar = document.querySelector(".dock");
     const offer = document.getElementById("offer");
+    const journey = document.getElementById("results");
     if (!bar) return;
     const sync = () => {
       const pastHero = window.scrollY > 320;
       const sheetOn = document.body.classList.contains("sheet-lock");
-      const rect = offer && offer.getBoundingClientRect();
-      const offerOn = !!(rect && rect.top < window.innerHeight * 0.82 && rect.bottom > 90);
-      bar.hidden = !pastHero || offerOn || sheetOn;
+      const overlapsViewport = (node) => {
+        if (!node) return false;
+        const rect = node.getBoundingClientRect();
+        return rect.top < window.innerHeight * 0.82 && rect.bottom > 90;
+      };
+      const immersiveSectionOn = overlapsViewport(journey) || overlapsViewport(offer);
+      bar.hidden = !pastHero || immersiveSectionOn || sheetOn;
     };
     window.addEventListener("scroll", sync, { passive: true });
     window.addEventListener("scrollend", sync, { passive: true });
