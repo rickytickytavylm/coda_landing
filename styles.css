@@ -404,8 +404,8 @@ button { font: inherit; color: inherit; }
 .program {
   position: relative;
   padding: 112px 0 120px;
-  background: var(--night);
-  color: #fff;
+  background: var(--paper);
+  color: var(--ink);
   overflow: hidden;
   isolation: isolate;
 }
@@ -423,8 +423,10 @@ button { font: inherit; color: inherit; }
 }
 .program .inner,
 .offer .inner { position: relative; z-index: 1; }
-.program .kicker { color: var(--aura); }
-.program .lead { color: rgba(255, 255, 255, 0.7); }
+.program > .haze,
+.offer > .haze { display: none; }
+.program .kicker { color: var(--violet); }
+.program .lead { color: var(--mute); }
 .modules {
   list-style: none;
   margin: 0;
@@ -435,16 +437,16 @@ button { font: inherit; color: inherit; }
   grid-template-columns: 200px minmax(0, 1fr);
   gap: 32px;
   padding: 48px 0;
-  border-top: 1px solid var(--line-dark);
+  border-top: 1px solid var(--line);
 }
-.modules li:last-child { border-bottom: 1px solid var(--line-dark); }
+.modules li:last-child { border-bottom: 1px solid var(--line); }
 .mod-num {
   font-family: var(--display);
   font-size: clamp(56px, 7.5vw, 112px);
   font-weight: 500;
   letter-spacing: -0.06em;
   line-height: 0.85;
-  color: var(--aura);
+  color: var(--violet);
 }
 .mod-body { max-width: 640px; }
 .mod-meta {
@@ -453,35 +455,36 @@ button { font: inherit; color: inherit; }
   font-size: 10px;
   letter-spacing: 0.14em;
   text-transform: uppercase;
-  color: rgba(255, 255, 255, 0.55);
+  color: var(--mute);
 }
 .mod-body h3 {
   font-size: clamp(24px, 2.8vw, 36px);
   margin-bottom: 16px;
+  color: var(--ink);
 }
 .mod-body > p:not(.mod-meta):not(.mod-tool) {
   margin: 0 0 20px;
   font-size: 16px;
   line-height: 1.55;
-  color: rgba(255, 255, 255, 0.8);
+  color: var(--mute);
 }
 .mod-tool {
   margin: 0;
   padding: 14px 16px;
   border-radius: 8px;
-  background: rgba(255, 255, 255, 0.06);
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: var(--snow);
+  border: 1px solid var(--line);
   font-size: 14.5px;
   line-height: 1.5;
-  color: rgba(255, 255, 255, 0.86);
+  color: var(--ink);
 }
 .mod-tool span {
   display: inline-block;
   margin-right: 10px;
   padding: 3px 8px;
   border-radius: 4px;
-  background: var(--aura);
-  color: var(--night);
+  background: var(--violet);
+  color: #fff;
   font-family: var(--display);
   font-size: 9px;
   letter-spacing: 0.12em;
@@ -490,7 +493,10 @@ button { font: inherit; color: inherit; }
 }
 
 /* ---------------- AUTHOR ---------------- */
-.author { background: var(--snow); }
+.author {
+  background: var(--violet);
+  color: #fff;
+}
 .author-stage {
   display: grid;
   grid-template-columns: minmax(280px, 42vw) minmax(0, 1fr);
@@ -520,6 +526,8 @@ button { font: inherit; color: inherit; }
   font-size: clamp(32px, 4vw, 50px);
   margin-bottom: 22px;
 }
+.author-meta .kicker { color: rgba(255, 255, 255, 0.68); }
+.author-meta .lead { color: rgba(255, 255, 255, 0.78); }
 .author-facts {
   list-style: none;
   margin: 36px 0 0;
@@ -531,22 +539,23 @@ button { font: inherit; color: inherit; }
   grid-template-columns: 100px minmax(0, 1fr);
   gap: 16px;
   padding: 14px 0;
-  border-top: 1px solid var(--line);
+  border-top: 1px solid rgba(255, 255, 255, 0.2);
 }
-.author-facts li:last-child { border-bottom: 1px solid var(--line); }
+.author-facts li:last-child { border-bottom: 1px solid rgba(255, 255, 255, 0.2); }
 .author-facts b {
   font-family: var(--display);
   font-size: 13px;
   font-weight: 500;
   letter-spacing: -0.02em;
 }
-.author-facts span { font-size: 14px; color: var(--mute); line-height: 1.4; }
+.author-facts span { font-size: 14px; color: rgba(255, 255, 255, 0.72); line-height: 1.4; }
 
 /* ---------------- QUOTE BAND ---------------- */
 .quote-band {
   background: var(--violet);
   color: #fff;
   padding: 104px 0;
+  border-top: 1px solid rgba(255, 255, 255, 0.2);
 }
 .quote {
   margin: 0 0 28px;
@@ -600,7 +609,7 @@ button { font: inherit; color: inherit; }
 .offer {
   position: relative;
   padding: 112px 0 120px;
-  background: var(--night);
+  background: var(--violet);
   color: #fff;
   overflow: hidden;
   isolation: isolate;
@@ -615,7 +624,7 @@ button { font: inherit; color: inherit; }
   gap: 64px;
   align-items: center;
 }
-.offer .kicker { color: var(--aura); }
+.offer .kicker { color: rgba(255, 255, 255, 0.7); }
 .offer-copy h2 {
   font-size: clamp(34px, 4.6vw, 60px);
   max-width: 12ch;
