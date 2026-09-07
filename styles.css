@@ -19,6 +19,7 @@ html {
   scroll-behavior: smooth;
   scroll-padding-top: 24px;
   overflow-x: hidden;
+  overflow-y: auto;
 }
 body {
   margin: 0;
@@ -251,6 +252,7 @@ button { font: inherit; color: inherit; }
   to { transform: translateX(-50%); }
 }
 @media (prefers-reduced-motion: reduce) { .track { animation: none; } }
+html.sheet-lock .track { animation-play-state: paused; }
 
 /* ---------------- AUDIENCE (sticky side) ---------------- */
 .audience { padding: 112px 0 104px; background: var(--paper); }
@@ -737,23 +739,29 @@ button { font: inherit; color: inherit; }
   font-weight: 500;
 }
 
-body.sheet-lock { overflow: hidden; }
+html.sheet-lock,
+body.sheet-lock {
+  overflow: hidden;
+  overscroll-behavior: none;
+}
+html.sheet-lock { scroll-behavior: auto; }
+body.sheet-lock {
+  position: fixed;
+  left: 0;
+  right: 0;
+  width: 100%;
+}
 .sheet {
+  display: none;
   position: fixed;
   inset: 0;
-  z-index: 60;
-  background: rgba(14, 12, 18, 0.75);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  display: flex;
+  z-index: 80;
   align-items: center;
   justify-content: center;
   padding: 20px;
-  opacity: 0;
-  pointer-events: none;
-  transition: opacity 0.25s ease;
+  background: rgba(14, 12, 18, 0.72);
 }
-.sheet.on { opacity: 1; pointer-events: auto; }
+.sheet.on { display: flex; }
 .sheet-card {
   background: #fff;
   color: var(--ink);
@@ -783,7 +791,10 @@ body.sheet-lock { overflow: hidden; }
   padding: 6px 10px;
 }
 .sheet-x:hover { color: var(--ink); }
-.pay-mount { margin-top: 18px; min-height: 120px; }
+.pay-mount { margin-top: 18px; min-height: 240px; }
+.pay-mount iframe,
+.pay-mount img,
+.pay-mount div { max-width: 100%; }
 .pay-stub-form { display: flex; flex-direction: column; gap: 12px; margin-top: 14px; }
 .pay-input {
   width: 100%;

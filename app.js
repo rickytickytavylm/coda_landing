@@ -37,8 +37,12 @@
     if (!box) return;
 
     if (cfg.GC_WIDGET_SRC && cfg.GC_WIDGET_HASH) {
-      if (box.querySelector("iframe") || document.getElementById(cfg.GC_WIDGET_HASH)) return;
-      box.innerHTML = "";
+      if (box.querySelector("iframe")) return;
+      const existing = document.getElementById(cfg.GC_WIDGET_HASH);
+      if (existing) {
+        document.dispatchEvent(new Event("StartWidget" + cfg.GC_WIDGET_HASH));
+        return;
+      }
       const script = document.createElement("script");
       script.id = cfg.GC_WIDGET_HASH;
       script.src = cfg.GC_WIDGET_SRC;
@@ -66,6 +70,23 @@
   function sheets() {
     const nodes = Array.from(document.querySelectorAll(".sheet"));
     if (!nodes.length) return;
+    let lockY = 0;
+
+    const lockPage = () => {
+      if (document.body.classList.contains("sheet-lock")) return;
+      lockY = window.scrollY;
+      document.documentElement.classList.add("sheet-lock");
+      document.body.classList.add("sheet-lock");
+      document.body.style.top = `-${lockY}px`;
+    };
+
+    const unlockPage = () => {
+      if (nodes.some((n) => n.classList.contains("on"))) return;
+      document.documentElement.classList.remove("sheet-lock");
+      document.body.classList.remove("sheet-lock");
+      document.body.style.top = "";
+      window.scrollTo(0, lockY);
+    };
 
     const setOpen = (id, on) => {
       const sheet = document.getElementById(id);
@@ -73,12 +94,12 @@
       sheet.classList.toggle("on", on);
       sheet.setAttribute("aria-hidden", on ? "false" : "true");
       if (on) {
-        document.body.classList.add("sheet-lock");
+        lockPage();
         if (id === "sheet-pay") mountWidget();
         const closeBtn = sheet.querySelector(".sheet-x");
         if (closeBtn) closeBtn.focus();
-      } else if (!nodes.some((n) => n.classList.contains("on"))) {
-        document.body.classList.remove("sheet-lock");
+      } else {
+        unlockPage();
       }
     };
 
