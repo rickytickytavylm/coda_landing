@@ -1,5 +1,66 @@
 (function () {
   const cfg = window.COURSE_CONFIG || {};
+  const SRC_KEY = "coda_traffic_source";
+  const VID_KEY = "coda_visitor_id";
+  const VIEW_KEY = "coda_view_sent";
+
+  function visitorId() {
+    try {
+      let id = localStorage.getItem(VID_KEY) || "";
+      if (!id) {
+        id = (crypto.randomUUID && crypto.randomUUID()) || ("v" + Date.now().toString(36) + Math.random().toString(36).slice(2, 8));
+        localStorage.setItem(VID_KEY, id);
+      }
+      return id;
+    } catch {
+      return "anon";
+    }
+  }
+
+  function normalizeSource(raw) {
+    return String(raw || "")
+      .trim()
+      .toLowerCase()
+      .replace(/[^a-z0-9_-]/g, "")
+      .slice(0, 40);
+  }
+
+  function captureSource() {
+    let fromLink = "";
+    try {
+      const sp = new URLSearchParams(location.search);
+      fromLink = normalizeSource(sp.get("src") || sp.get("utm_source") || "");
+      if (fromLink) localStorage.setItem(SRC_KEY, fromLink);
+      return fromLink || localStorage.getItem(SRC_KEY) || "";
+    } catch {
+      return fromLink;
+    }
+  }
+
+  function track(event, source) {
+    const url = cfg.TRACK_URL;
+    if (!url) return;
+    const src = normalizeSource(source || captureSource());
+    const q = new URLSearchParams({
+      e: event === "pay_open" ? "pay_open" : "view",
+      vid: visitorId(),
+    });
+    if (src) q.set("src", src);
+    const pixel = new Image(1, 1);
+    pixel.referrerPolicy = "no-referrer";
+    pixel.src = url + (url.includes("?") ? "&" : "?") + q.toString();
+  }
+
+  function trackVisit() {
+    const source = captureSource();
+    try {
+      if (sessionStorage.getItem(VIEW_KEY)) return;
+      sessionStorage.setItem(VIEW_KEY, "1");
+    } catch {
+      /* private mode: still send */
+    }
+    track("view", source);
+  }
 
   function fill() {
     const dates = cfg.DATES || "4 недели · 4 вебинара";
@@ -95,7 +156,10 @@
       sheet.setAttribute("aria-hidden", on ? "false" : "true");
       if (on) {
         lockPage();
-        if (id === "sheet-pay") mountWidget();
+        if (id === "sheet-pay") {
+          mountWidget();
+          track("pay_open");
+        }
         const closeBtn = sheet.querySelector(".sheet-x");
         if (closeBtn) closeBtn.focus();
       } else {
@@ -154,4 +218,5 @@
   reveal();
   sheets();
   dock();
+  trackVisit();
 })();

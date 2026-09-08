@@ -9,4 +9,5 @@ window.COURSE_CONFIG = {
   GC_WIDGET_ID: "1653042",
   GC_WIDGET_HASH: "f693c91d022f50ba507ef75f5888fc1704e3622c",
   GC_WIDGET_SRC: "https://tvoi-shag.online/pl/lite/widget/script?id=1653042",
+  TRACK_URL: "https://api.kira-ai.online/api/coda/hit",
 };
