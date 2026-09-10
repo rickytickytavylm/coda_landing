@@ -708,6 +708,69 @@ html.sheet-lock .track { animation-play-state: paused; }
   letter-spacing: 0.14em;
   text-transform: uppercase;
 }
+.legal-foot {
+  background: var(--snow);
+  color: var(--mute);
+  padding: 56px 0 120px;
+  border-top: 1px solid rgba(23, 21, 27, .08);
+}
+.legal-foot-inner {
+  width: min(760px, calc(100% - 48px));
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  font-family: var(--sans);
+  font-size: 13px;
+  line-height: 1.55;
+  letter-spacing: 0;
+  text-transform: none;
+}
+.legal-kicker {
+  margin: 0;
+  font-size: 11px;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+}
+.legal-owner {
+  margin: 0;
+  color: var(--ink);
+  font-size: 16px;
+  line-height: 1.35;
+}
+.legal-foot p { margin: 0; }
+.legal-links { display: flex; flex-direction: column; gap: 6px; margin: 6px 0; }
+.legal-links a,
+.legal-foot a { color: var(--ink); text-decoration: underline; text-underline-offset: 3px; }
+.legal-edu { color: var(--ink); font-weight: 600; }
+.cookie-bar {
+  position: fixed;
+  left: 16px;
+  right: 16px;
+  bottom: 84px;
+  z-index: 80;
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  max-width: 720px;
+  padding: 16px 18px;
+  border-radius: 12px;
+  background: #17151b;
+  color: #eee9e0;
+}
+.cookie-bar[hidden] { display: none; }
+.cookie-bar p { margin: 0; font-size: 13px; line-height: 1.45; }
+.cookie-bar a { color: #fff; }
+.cookie-bar button {
+  flex: 0 0 auto;
+  min-height: 36px;
+  padding: 0 16px;
+  border: 0;
+  border-radius: 8px;
+  background: #c6b9ee;
+  color: #17151b;
+  cursor: pointer;
+}
 .dock {
   position: fixed;
   left: 0;
@@ -929,4 +992,6 @@ body.sheet-lock {
   .dock .btn { padding: 8px 16px; font-size: 12px; min-height: 38px; }
   .footer { padding: 28px 0 36px; }
   .footer-inner { flex-direction: column; text-align: center; }
+  .legal-foot { padding: 40px 0 110px; }
+  .cookie-bar { left: 10px; right: 10px; bottom: 76px; flex-direction: column; }
 }

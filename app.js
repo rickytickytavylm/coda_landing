@@ -214,9 +214,25 @@
     sync();
   }
 
+  function cookie() {
+    const bar = document.getElementById("cookieBar");
+    const ok = document.getElementById("cookieOk");
+    if (!bar || !ok) return;
+    if (localStorage.getItem("coda_cookie_ok")) {
+      bar.hidden = true;
+      return;
+    }
+    bar.hidden = false;
+    ok.onclick = () => {
+      localStorage.setItem("coda_cookie_ok", "1");
+      bar.hidden = true;
+    };
+  }
+
   fill();
   reveal();
   sheets();
   dock();
   trackVisit();
+  cookie();
 })();
