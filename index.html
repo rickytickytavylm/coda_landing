@@ -23,7 +23,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Golos+Text:wght@400;500;600;700&family=Play:wght@400;700&family=Unbounded:wght@400;500;600;700&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="styles.css?v=17" />
+  <link rel="stylesheet" href="styles.css?v=18" />
 </head>
 <body>
 
@@ -48,9 +48,12 @@
 
     <div class="hero-east">
       <h1>Любить, не теряя себя</h1>
-      <button class="btn light" type="button" data-open="sheet-pay">
-        Принять участие за 29 990 ₽
-      </button>
+      <div class="hero-cta">
+        <button class="btn light" type="button" data-open="sheet-pay">
+          Принять участие за 29 990 ₽*
+        </button>
+        <p class="hero-note">* Возможно частями или в кредит</p>
+      </div>
     </div>
 
     <div class="hero-west">
@@ -60,7 +63,7 @@
         <a href="#program">Программа</a>
         <a href="#author">Автор</a>
         <span>4 недели</span>
-        <span data-field="price">29 990 ₽</span>
+        <span><span data-field="price">29 990 ₽</span>*</span>
       </div>
     </div>
   </section>
@@ -271,10 +274,10 @@
       <div class="ticket">
         <p class="ticket-kicker">Флагманский курс</p>
         <h3>Любить, не теряя себя</h3>
-        <p class="ticket-price" data-field="price">29 990 ₽</p>
+        <p class="ticket-price"><span data-field="price">29 990 ₽</span>*</p>
         <p class="ticket-sub">1 месяц, 4 недели. Вебинары, группы, 2 консультации и чат</p>
         <button class="btn violet" type="button" data-open="sheet-pay">Оформить участие</button>
-        <p class="ticket-note">Безопасная оплата через GetCourse.</p>
+        <p class="ticket-note">* Возможно частями или в кредит. Безопасная оплата через GetCourse.</p>
       </div>
     </div>
   </section>
@@ -307,7 +310,7 @@
   <div class="dock" hidden>
     <div class="dock-left">
       <span class="dock-title">Любить, не теряя себя</span>
-      <span class="dock-price" data-field="price">29 990 ₽</span>
+      <span class="dock-price"><span data-field="price">29 990 ₽</span>*</span>
     </div>
     <button class="btn primary" type="button" data-open="sheet-pay">Принять участие</button>
   </div>

@@ -190,6 +190,18 @@ button { font: inherit; color: inherit; }
   line-height: 1.15;
 }
 .hero-east .btn { min-height: 44px; padding: 12px 22px; }
+.hero-cta {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 8px;
+}
+.hero-note {
+  margin: 0;
+  font-size: 12px;
+  line-height: 1.35;
+  color: rgba(255, 255, 255, 0.62);
+}
 .hero-west {
   left: var(--gutter);
   bottom: 48px;
@@ -927,6 +939,8 @@ body.sheet-lock {
   }
   .hero-east h1 { font-size: 28px; margin-bottom: 14px; }
   .hero-east .btn { width: 100%; }
+  .hero-cta { align-items: stretch; }
+  .hero-note { text-align: left; }
   .hero-west { left: 18px; right: 18px; bottom: 20px; max-width: none; }
   .hero-west p { font-size: 14px; margin-bottom: 10px; }
   .chips a, .chips span { min-height: 30px; padding: 4px 10px; font-size: 12px; }
